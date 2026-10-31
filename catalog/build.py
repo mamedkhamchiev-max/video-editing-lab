@@ -25,6 +25,24 @@ def residence(o):
     if ok:
         return 'ok',f'Подходит: квартира от $200 000 — например, {ok[0][1]} за {money(ok[0][0])}.'
     return 'no',f'Квартиры здесь дешевле $200 000 — минимальной суммы для ВНЖ по покупке в Стамбуле. Для ВНЖ выберите объект от $200 000.'
+
+LOC={'Büyükçekmece':'Бююкчекмедже','Esenyurt':'Эсеньюрте','Bağcılar':'Багджыларе','Beylikdüzü':'Бейликдюзю','Maltepe':'Малтепе','Beşiktaş':'Бешикташе','Zeytinburnu':'Зейтинбурну','Küçükçekmece':'Кючюкчекмедже','Avcilar':'Авджыларе','Avcılar':'Авджыларе','Pendik':'Пендике','Ümraniye':'Умрание','Beyoğlu':'Бейоглу','Sarıyer':'Сарыере','Göktürk':'Гёктюрке','Bahçelievler':'Бахчелиэвлере'}
+def seo_text(o):
+    dist=o['loc'].split(', ')[1].strip();ru=LOC[dist]
+    P=[num(p) for p,_ in o['apts']];am=set(o['amen']);tr=dict(o['chars']).get('Транспорт','').lower()
+    sea='Пляж рядом' in am or 'море' in tr or 'пляж' in tr or o['num'] in(5,15,16,25)
+    villa=o['num']==1
+    obj='виллу' if villa else ('недорогую квартиру' if min(P)<200000 else 'квартиру')
+    s=f"Купить {obj} в Стамбуле в {ru} ({dist})"
+    if sea: s+=" — недвижимость в Турции у моря"
+    s+=". "
+    s+="Объект подходит для получения гражданства Турции за инвестиции в недвижимость" + (" — достаточно одной покупки от $400 000" if max(P)>=400000 else " при покупке нескольких квартир на сумму от $400 000")
+    if max(P)>=200000: s+=", а также для оформления ВНЖ Турции по недвижимости, в том числе семейного ВНЖ"
+    s+=". Ferta Estate сопровождает покупку недвижимости в Турции для россиян и иностранцев под ключ."
+    return s
+def seo_short(o):
+    first=seo_text(o).split('. ')[0]
+    return first+'. Ferta Estate сопровождает покупку недвижимости в Турции для россиян и иностранцев под ключ.'
 def highlights(o):
     ch=dict(o['chars']);H=[];am=set(o['amen'])
     specs=' '.join(s for p,s in o['apts'])
@@ -56,7 +74,7 @@ body{font-family:Inter,sans-serif;color:var(--text);-webkit-print-color-adjust:e
 .logo img{width:8mm;height:8mm;border-radius:50%}
 .logo b{color:var(--accent)}
 .top .r{font-family:Montserrat;font-weight:600;font-size:9pt;color:#9FB6C4;letter-spacing:.3mm}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:41mm 41mm 28mm;gap:1.6mm;padding:4mm 10mm 0;flex:none}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:38mm 38mm 26mm;gap:1.6mm;padding:4mm 10mm 0;flex:none}
 .grid img{width:100%;height:100%;object-fit:cover;border-radius:2mm;display:block}
 .grid img.plan{object-fit:contain;background:#fff;border:.25mm solid var(--border)}
 .grid .big{grid-column:span 8;grid-row:span 2}
@@ -130,30 +148,30 @@ cover_imgs=[d[21]['photos'][0],d[26]['photos'][0],d[0]['photos'][0],d[25]['photo
 m=''.join(f'<img class="{"w" if i==0 else ""}" src="{p}">' for i,p in enumerate(cover_imgs))
 pages.append(f'''<div class="page cover"><div class="mosaic">{m}</div><div class="cv">
 <div class="logo"><img src="img_s/logo.jpg">FERTA <b>ESTATE</b></div>
-<h1>Каталог недвижимости<br><em>Стамбула</em> 2026</h1>
-<p>Квартиры и виллы под гражданство Турции, ВНЖ, для жизни и инвестиций.<br>На каждой странице — один объект: фото, описание, характеристики и цены.</p>
+<h1>Недвижимость в Турции:<br>квартиры в <em>Стамбуле</em> 2026</h1>
+<p>Купить квартиру в Стамбуле под гражданство Турции и ВНЖ — для россиян и иностранцев, для жизни и инвестиций.<br>На каждой странице — один объект: фото, описание, характеристики и цены.</p>
 <div class="stats"><div><b>{len(d)}</b>объектов</div><div><b>от ${mins:,}</b>стартовая цена</div><div><b>$400 000</b>порог гражданства</div></div>
 <div class="contacts"><div><b>+90 551 639 64 64</b> · WhatsApp · Telegram @fertaestate34</div><div>fertaestate.com</div></div>
 </div></div>'''.replace(',',' ',1) if False else '')
 pg=f'''<div class="page cover"><div class="mosaic">{m}</div><div class="cv">
 <div class="logo"><img src="img_s/logo.jpg">FERTA <b>ESTATE</b></div>
-<h1>Каталог недвижимости<br><em>Стамбула</em> 2026</h1>
-<p>Квартиры и виллы под гражданство Турции, ВНЖ, для жизни и инвестиций.<br>На каждой странице — один объект: фото, описание, характеристики и цены.</p>
+<h1>Недвижимость в Турции:<br>квартиры в <em>Стамбуле</em> 2026</h1>
+<p>Купить квартиру в Стамбуле под гражданство Турции и ВНЖ — для россиян и иностранцев, для жизни и инвестиций.<br>На каждой странице — один объект: фото, описание, характеристики и цены.</p>
 <div class="stats"><div><b>{len(d)}</b>объектов</div><div><b>от ${mins:,}</b>стартовая цена</div><div><b>$400 000</b>порог гражданства</div></div>
 <div class="contacts"><div><b>+90 551 639 64 64</b> · WhatsApp · Telegram @fertaestate34</div><div>fertaestate.com</div></div>
 </div></div>'''.replace(f'${mins:,}',f'${mins:,}'.replace(',',' '))
 info=f'''<div class="page">{top("Гражданство и ВНЖ")}<div class="info">
-<h1>Гражданство и ВНЖ через покупку недвижимости</h1>
+<h1>Как получить гражданство Турции и ВНЖ через покупку недвижимости</h1>
 <div class="lead">На странице каждого объекта мы посчитали, как получить гражданство или ВНЖ именно в этом проекте: одной квартирой или несколькими.</div>
-<div class="box g"><h2>🇹🇷 Гражданство Турции — от $400 000</h2><ul>
+<div class="box g"><h2>🇹🇷 Гражданство Турции за инвестиции в недвижимость — от $400 000</h2><ul>
 <li>Нужно купить недвижимость общей стоимостью от <b>$400 000</b>. Можно одну квартиру или несколько — суммы складываются.</li>
 <li>Стоимость подтверждается официальной оценкой (экспертизой) — она должна быть не ниже $400 000.</li>
 <li>Недвижимость нельзя продавать 3 года — это фиксируется в документах.</li>
 <li>Оплата — в валюте через турецкий банк.</li>
 <li>Гражданство получают вместе с супругом(ой) и детьми до 18 лет.</li></ul></div>
-<div class="box"><h2>ВНЖ — от $200 000</h2><ul>
+<div class="box"><h2>ВНЖ Турции по недвижимости — от $200 000</h2><ul>
 <li>В Стамбуле для ВНЖ по покупке недвижимости стоимость должна быть от <b>$200 000</b>.</li>
-<li>ВНЖ выдаётся на собственника и членов семьи и продлевается, пока у вас есть недвижимость.</li>
+<li>Семейное ВНЖ: выдаётся на собственника и членов семьи и продлевается, пока у вас есть недвижимость.</li>
 <li>ВНЖ оформляется только в районах, открытых для регистрации иностранцев, — конкретный адрес мы проверяем перед сделкой.</li></ul></div>
 <div class="note">Условия приведены по действующим правилам на момент составления каталога и могут меняться. Перед сделкой менеджер Ferta Estate подтвердит актуальные требования и подберёт объект под вашу цель.</div>
 </div>{foot()}</div>'''
@@ -165,7 +183,7 @@ for o in d:
     cells+= [f'<img class="side{cl(p)}" src="{p}">' for p in ph[1:3]]
     rest=ph[3:]
     for p in rest: cells.append(f'<img class="{cl(p).strip()}" style="grid-column:span {12//len(rest)}" src="{p}">')
-    gridstyle='' if rest else ' style="grid-template-rows:41mm 41mm"'
+    gridstyle='' if rest else ' style="grid-template-rows:38mm 38mm"'
     ch=dict(o['chars'])
     tags=[]
     if ch.get('Готовность'): tags.append(f'<span class="tag">{E(ch["Готовность"])}</span>')
@@ -174,7 +192,7 @@ for o in d:
     if 'Рассрочка' in ch: tags.append('<span class="tag">Рассрочка</span>')
     kv=''.join(f'<div class="kv"><span>{E(k)}</span><b>{E(v)}</b></div>' for k,v in o['chars'] if k not in('Гражданство','ВНЖ'))
     cs,ct=citizenship(o);rs,rt=residence(o)
-    law=f'<div class="law"><div class="cz"><b>🇹🇷 Гражданство Турции</b>{E(ct)}</div><div class="{rs}"><b>ВНЖ (вид на жительство)</b>{E(rt)}</div></div>'
+    law=f'<div class="law"><div class="cz"><b>🇹🇷 Гражданство Турции за инвестиции</b>{E(ct)}</div><div class="{rs}"><b>ВНЖ Турции по недвижимости</b>{E(rt)}</div></div>'
     hl='<div><h3>Главное об объекте</h3><ul class="hlu">'+''.join(f'<li>{E(h)}</li>' for h in highlights(o))+'</ul></div>'
     apts=''.join(f'<div class="apt"><span>{E(s)}</span><b>{E(p)}</b></div>' for p,s in o['apts'])
     amen=''.join(f'<span>{E(a)}</span>' for a in o['amen'])
@@ -183,10 +201,12 @@ for o in d:
 <div class="grid"{gridstyle}>{''.join(cells)}</div>
 <div class="body"><div class="head"><div><h2>Объект №{o['num']}</h2><div class="loc">{E(o['loc'])}</div></div><div class="price"><small>цена от</small>{E(price)}</div></div>
 <div class="tags">{''.join(tags)}</div>
-<div class="desc">{E(o['text'])}</div>
+<div class="desc">{E(o['text'])} {E(seo_short(o))}</div>
 {law}
 <div class="cols"><div>{hl}</div><div><h3>Квартиры в продаже</h3>{apts}</div></div>
 <div class="amen">{amen}</div></div>{foot(o)}</div>''')
 open('catalog.html','w').write(f'''<!doctype html><html><head><meta charset="utf-8"><title>Каталог Ferta Estate</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>{''.join(pages)}</body></html>''')
+
+json.dump({str(o['num']):{'id':o['id'],'text':o['text']+' '+seo_text(o)} for o in d},open('descriptions_site.json','w'),ensure_ascii=False,indent=1)
