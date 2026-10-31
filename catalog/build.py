@@ -27,19 +27,47 @@ def residence(o):
     return 'no',f'Квартиры здесь дешевле $200 000 — минимальной суммы для ВНЖ по покупке в Стамбуле. Для ВНЖ выберите объект от $200 000.'
 
 LOC={'Büyükçekmece':'Бююкчекмедже','Esenyurt':'Эсеньюрте','Bağcılar':'Багджыларе','Beylikdüzü':'Бейликдюзю','Maltepe':'Малтепе','Beşiktaş':'Бешикташе','Zeytinburnu':'Зейтинбурну','Küçükçekmece':'Кючюкчекмедже','Avcilar':'Авджыларе','Avcılar':'Авджыларе','Pendik':'Пендике','Ümraniye':'Умрание','Beyoğlu':'Бейоглу','Sarıyer':'Сарыере','Göktürk':'Гёктюрке','Bahçelievler':'Бахчелиэвлере'}
-def seo_text(o):
+def seo_text(o,site=True):
+    n=o['num'];v=lambda opts:opts[n%len(opts)]
     dist=o['loc'].split(', ')[1].strip();ru=LOC[dist]
-    P=[num(p) for p,_ in o['apts']];am=set(o['amen']);tr=dict(o['chars']).get('Транспорт','').lower()
-    sea='Пляж рядом' in am or 'море' in tr or 'пляж' in tr or o['num'] in(5,15,16,25)
-    villa=o['num']==1
-    obj='виллу' if villa else ('недорогую квартиру' if min(P)<200000 else 'квартиру')
-    s=f"Купить {obj} в Стамбуле в {ru} ({dist})"
-    if sea: s+=" — недвижимость в Турции у моря"
-    s+=". "
-    s+="Объект подходит для получения гражданства Турции за инвестиции в недвижимость" + (" — достаточно одной покупки от $400 000" if max(P)>=400000 else " при покупке нескольких квартир на сумму от $400 000")
-    if max(P)>=200000: s+=", а также для оформления ВНЖ Турции по недвижимости, в том числе семейного ВНЖ"
-    s+=". Ferta Estate сопровождает покупку недвижимости в Турции для россиян и иностранцев под ключ."
-    return s
+    P=[num(p) for p,_ in o['apts']];am=set(o['amen']);ch=dict(o['chars']);tr=ch.get('Транспорт','').lower()
+    ready=ch.get('Готовность','').startswith('Готов')
+    sea='Пляж рядом' in am or 'море' in tr or 'пляж' in tr or n in(5,15,16,25)
+    small=any(re.search(r'(1\+[01]|Студия)',sp) for _,sp in o['apts'])
+    S=[]
+    # 1: what + where
+    kind='виллу' if n==1 else ('недорогую квартиру' if min(P)<200000 else 'квартиру')
+    if ready: s1=v([f"Купить {kind} в Стамбуле в {ru} ({dist}) можно в сданном доме — без ожидания стройки.",
+                    f"Готовая недвижимость в Турции: {kind.replace('виллу','вилла').replace('квартиру','квартира').replace('недорогую','недорогая')} в {ru} ({dist}), дом уже сдан."])
+    else: s1=v([f"Новостройка в {ru} ({dist}) — квартиры в Стамбуле от застройщика на этапе строительства.",
+                f"Купить {kind} в новостройке Стамбула в {ru} ({dist}) по цене застройщика."])
+    if sea: S.append('Море рядом — объект для тех, кто ищет недвижимость в Турции у моря.')
+    S.insert(0,s1)
+    # 2: complex + payment
+    feats=[]
+    if 'Охрана 24/7' in am and 'Бассейн' in am: feats.append(v(['закрытый охраняемый комплекс с бассейном','закрытый жилой комплекс с бассейном']))
+    elif 'Бассейн' in am: feats.append('жилой комплекс с бассейном')
+    if 'СПА / хаммам' in am: feats.append(v(['хаммамом и СПА','турецким хаммамом']))
+    inst='Рассрочка' in ch
+    if feats: S.append(('Это '+', '.join(feats)+(v(['; доступна рассрочка от застройщика.','; застройщик даёт рассрочку.']) if inst else '.')).capitalize() if False else 'Это '+', '.join(feats)+(v(['; доступна рассрочка от застройщика.','; застройщик даёт рассрочку.']) if inst else '.'))
+    elif inst: S.append('Доступна рассрочка от застройщика.')
+    # 3: investment
+    if (small or ready) and n!=1:
+        S.append(v(['Хороший вариант для инвестиций: квартиру под аренду легко сдавать, это доходная недвижимость в Стамбуле.',
+                    'Подходит для инвестиций в недвижимость Турции — как квартира под аренду с постоянным доходом.',
+                    'Объект интересен и как доходная недвижимость: такие квартиры в Стамбуле хорошо сдаются в аренду.']))
+    # 4: citizenship / residence
+    one=max(P)>=400000
+    cz=v(['гражданство Турции через инвестиции','турецкий паспорт за инвестиции','гражданство Турции за инвестиции в недвижимость'])
+    how='одной покупкой от $400 000' if one else 'при покупке нескольких квартир на сумму от $400 000'
+    if max(P)>=200000:
+        S.append(v([f"Объект подходит под {cz} — {how}, и под ВНЖ при покупке недвижимости.",
+                    f"Здесь можно получить {cz} ({how}) или вид на жительство в Турции, в том числе семейный ВНЖ.",
+                    f"Покупка даёт право на ВНЖ Турции по недвижимости, а {cz} можно получить {how}."]))
+    else:
+        S.append(f"Объект подходит под {cz} {how}.")
+    if site: S.append('Ferta Estate сопровождает покупку недвижимости в Турции для россиян под ключ.')
+    return ' '.join(S)
 def seo_short(o):
     first=seo_text(o).split('. ')[0]
     return first+'. Ferta Estate сопровождает покупку недвижимости в Турции для россиян и иностранцев под ключ.'
@@ -74,7 +102,7 @@ body{font-family:Inter,sans-serif;color:var(--text);-webkit-print-color-adjust:e
 .logo img{width:8mm;height:8mm;border-radius:50%}
 .logo b{color:var(--accent)}
 .top .r{font-family:Montserrat;font-weight:600;font-size:9pt;color:#9FB6C4;letter-spacing:.3mm}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:38mm 38mm 26mm;gap:1.6mm;padding:4mm 10mm 0;flex:none}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:34mm 34mm 24mm;gap:1.6mm;padding:4mm 10mm 0;flex:none}
 .grid img{width:100%;height:100%;object-fit:cover;border-radius:2mm;display:block}
 .grid img.plan{object-fit:contain;background:#fff;border:.25mm solid var(--border)}
 .grid .big{grid-column:span 8;grid-row:span 2}
@@ -88,7 +116,7 @@ h2{font-family:Montserrat;font-weight:800;font-size:21pt;color:var(--navy);line-
 .tags{display:flex;gap:2mm;margin-top:3.5mm;flex-wrap:wrap}
 .tag{font-size:8pt;font-weight:600;padding:1.2mm 3mm;border-radius:10mm;background:rgba(53,197,221,.12);color:#1C8FA3}
 .tag.g{background:rgba(231,177,90,.18);color:#A8721E}
-.desc{font-size:9.4pt;line-height:1.5;margin-top:3.5mm;color:var(--text)}
+.desc{font-size:8.7pt;line-height:1.45;margin-top:3.5mm;color:var(--text)}
 .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:7mm;margin-top:4mm}
 h3{font-family:Montserrat;font-weight:700;font-size:8.5pt;text-transform:uppercase;letter-spacing:.5mm;color:var(--navy);margin-bottom:2mm;padding-bottom:1.5mm;border-bottom:.5mm solid var(--accent)}
 .kv{display:flex;justify-content:space-between;gap:3mm;font-size:8.6pt;padding:1.25mm 0;border-bottom:.2mm solid var(--border)}
@@ -183,7 +211,7 @@ for o in d:
     cells+= [f'<img class="side{cl(p)}" src="{p}">' for p in ph[1:3]]
     rest=ph[3:]
     for p in rest: cells.append(f'<img class="{cl(p).strip()}" style="grid-column:span {12//len(rest)}" src="{p}">')
-    gridstyle='' if rest else ' style="grid-template-rows:38mm 38mm"'
+    gridstyle='' if rest else ' style="grid-template-rows:34mm 34mm"'
     ch=dict(o['chars'])
     tags=[]
     if ch.get('Готовность'): tags.append(f'<span class="tag">{E(ch["Готовность"])}</span>')
@@ -201,7 +229,7 @@ for o in d:
 <div class="grid"{gridstyle}>{''.join(cells)}</div>
 <div class="body"><div class="head"><div><h2>Объект №{o['num']}</h2><div class="loc">{E(o['loc'])}</div></div><div class="price"><small>цена от</small>{E(price)}</div></div>
 <div class="tags">{''.join(tags)}</div>
-<div class="desc">{E(o['text'])} {E(seo_short(o))}</div>
+<div class="desc">{E(o['text'])} {E(seo_text(o,False))}</div>
 {law}
 <div class="cols"><div>{hl}</div><div><h3>Квартиры в продаже</h3>{apts}</div></div>
 <div class="amen">{amen}</div></div>{foot(o)}</div>''')
