@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{ --dark:#231B15; --cream:#F4EDE3; --gold:#C9A46A; --muted:#D9CBB6; }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -7,19 +7,20 @@ body{font-variant-numeric:lining-nums;width:1080px;height:1350px;overflow:hidden
 .s{position:absolute;inset:0;display:none}
 .s.on{display:block}
 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,27,21,.55) 0%,rgba(35,27,21,0) 22%,rgba(35,27,21,0) 45%,rgba(35,27,21,.92) 78%,var(--dark) 100%)}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,27,21,.55) 0%,rgba(35,27,21,0) 18%,rgba(35,27,21,.15) 32%,rgba(35,27,21,.9) 62%,var(--dark) 100%)}
 .shade.light{background:linear-gradient(180deg,rgba(35,27,21,.45) 0%,rgba(35,27,21,0) 18%,rgba(35,27,21,0) 72%,rgba(35,27,21,.85) 100%)}
 .brand{position:absolute;top:56px;left:64px;font-size:24px;font-weight:600;letter-spacing:6px;text-transform:uppercase}
 .brand b{color:var(--gold)}
 .num{position:absolute;top:56px;right:64px;font-size:24px;font-weight:500;letter-spacing:3px;color:var(--muted)}
 .cover{position:absolute;left:64px;right:64px;bottom:64px}
-.pill{display:inline-block;background:var(--gold);color:var(--dark);font-weight:700;font-size:24px;letter-spacing:3px;text-transform:uppercase;padding:12px 24px;border-radius:40px}
-h1{font-family:'Playfair Display',serif;font-weight:600;font-size:78px;line-height:1.05;margin:28px 0 26px}
+.pill{display:inline-flex;align-items:center;gap:18px;background:var(--gold);color:var(--dark);font-weight:800;font-size:34px;letter-spacing:2px;text-transform:uppercase;padding:16px 22px 16px 32px;border-radius:50px}
+.pill svg{width:66px;height:44px;border-radius:5px;display:block}
+h1{font-family:'Playfair Display',serif;font-weight:800;font-size:112px;line-height:1;margin:30px 0 28px;text-shadow:0 4px 24px rgba(0,0,0,.45)}
 h1 i{color:var(--gold);font-style:normal}
-.price{font-family:'Playfair Display',serif;font-size:96px;font-weight:700;color:var(--gold);line-height:1}
+.price{font-family:'Playfair Display',serif;font-size:112px;font-weight:800;color:var(--gold);line-height:1}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:1px solid rgba(201,164,106,.5)}
 .grid div{padding:24px 0 0;font-size:24px;color:var(--muted);font-weight:500}
-.grid div strong{display:block;font-size:38px;color:var(--cream);font-weight:700;margin-bottom:4px}
+.grid div strong{display:block;font-size:44px;color:var(--cream);font-weight:700;margin-bottom:4px}
 .cap{position:absolute;left:64px;right:64px;bottom:64px}
 .cap .k{font-size:22px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600}
 .cap .t{font-family:'Playfair Display',serif;font-size:58px;font-weight:600;margin-top:10px}
@@ -48,7 +49,7 @@ const slides=[
 const n=+new URLSearchParams(location.search).get('n')||1, s=slides[n-1], total=slides.length;
 let h=`<div class="s on"><img class="bg" src="img/${s.img}">`;
 if(s.cover) h+=`<div class="shade"></div><div class="brand">Ferta <b>Estate</b></div><div class="num">${n}/${total}</div>
- <div class="cover"><span class="pill">Под гражданство Турции</span>
+ <div class="cover"><span class="pill">Под гражданство Турции <svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#E30A17"/><circle cx="10.6" cy="10" r="5" fill="#fff"/><circle cx="11.85" cy="10" r="4" fill="#E30A17"/><polygon fill="#fff" points="14.5,10 18.97,8.55 16.2,12.35 16.2,7.65 18.97,11.45"/></svg></span>
  <h1>Квартира у <i>Галатской башни</i></h1>
  <div class="price">$475 000</div>
  <div class="grid"><div><strong>1+1</strong>планировка</div><div><strong>60 м²</strong>площадь</div><div><strong>Таксим</strong>рядом Истикляль</div></div></div>`;
