@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{ /* ЦВЕТА САЙТА — заменить здесь */
+  --bg:#0E1A2B; --bg2:#16263D; --accent:#E30A17; --text:#FFFFFF; --muted:#AEB9C9; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;font-family:Montserrat,sans-serif;color:var(--text);
+  background:radial-gradient(circle at 80% 15%,var(--bg2),var(--bg) 60%);overflow:hidden;position:relative}
+.slide{display:none;position:absolute;inset:0;padding:140px 90px 160px;flex-direction:column}
+.slide.on{display:flex}
+.tag{display:inline-block;align-self:flex-start;background:var(--accent);font-weight:800;font-size:34px;
+  letter-spacing:4px;padding:16px 30px;border-radius:8px;text-transform:uppercase}
+.date{margin-top:36px;font-size:36px;color:var(--muted);font-weight:500}
+.big{font-size:330px;font-weight:900;line-height:.9;margin-top:260px;color:var(--accent)}
+.big small{font-size:90px;color:var(--text);display:block;margin-top:10px;font-weight:800}
+h1{font-size:84px;font-weight:900;line-height:1.08;margin-top:60px}
+h1.s{font-size:76px;margin-top:80px}
+.bar{width:140px;height:10px;background:var(--accent);margin:56px 0;border-radius:5px}
+p{font-size:42px;line-height:1.4;color:var(--muted);font-weight:500}
+ul{list-style:none;margin-top:10px}
+li{font-size:40px;line-height:1.35;font-weight:600;padding:22px 0 22px 56px;position:relative;border-bottom:2px solid rgba(255,255,255,.1)}
+li:before{content:"";position:absolute;left:0;top:38px;width:22px;height:22px;background:var(--accent);border-radius:50%}
+.foot{margin-top:auto;padding-top:40px;font-size:34px;color:var(--muted);font-weight:700;letter-spacing:2px}
+.crescent{position:absolute;right:-330px;top:1150px;width:760px;height:760px;border-radius:50%;
+  box-shadow:-70px 0 0 0 var(--accent);opacity:.18}
+</style></head><body>
+<div class="slide" id="s1"><div class="crescent"></div>
+  <span class="tag">Главная новость</span>
+  <div class="date">29 октября 2026</div>
+  <div class="big">103<small>года Республике</small></div>
+  <div class="bar"></div>
+  <p>29 октября 1923 года Мустафа Кемаль Ататюрк провозгласил Турецкую Республику. В этом году страна отметила 103-ю годовщину основания.</p>
+  <div class="foot">ДЕНЬ РЕСПУБЛИКИ · CUMHURİYET BAYRAMI</div>
+</div>
+<div class="slide" id="s2">
+  <span class="tag">Итоги саммита</span>
+  <div class="date">30 октября 2026 · Анкара</div>
+  <h1 class="s">XIII саммит Организации тюркских государств</h1>
+  <div class="bar"></div>
+  <ul>
+    <li>Принята Анкарская декларация из 163 пунктов</li>
+    <li>Предложено создать Колледж оборонной промышленности ОТГ в Турции</li>
+    <li>Поддержка Среднего и Зангезурского коридоров</li>
+    <li>Председательство перешло от Азербайджана к Турции</li>
+    <li>Следующий саммит пройдёт в Узбекистане в 2027 году</li>
+  </ul>
+  <div class="foot">«ТЮРКСКИЙ ВЕК: ЕДИНСТВО ЯЗЫКА, МЫСЛИ И ДЕЛА»</div>
+</div>
+<script>document.getElementById(new URLSearchParams(location.search).get('s')||'s1').classList.add('on')</script>
+</body></html>
