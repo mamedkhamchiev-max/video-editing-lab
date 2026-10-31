@@ -14,6 +14,7 @@ body{font-variant-numeric:lining-nums;width:1080px;height:1350px;overflow:hidden
 .num{position:absolute;top:56px;right:64px;font-size:24px;font-weight:500;letter-spacing:3px;color:var(--muted)}
 .cover{position:absolute;left:64px;right:64px;bottom:64px}
 .pill{display:inline-flex;align-items:center;gap:18px;background:var(--gold);color:var(--dark);font-weight:800;font-size:34px;letter-spacing:2px;text-transform:uppercase;padding:16px 22px 16px 32px;border-radius:50px}
+.tower{display:inline-block;height:1.5em;width:auto;margin-left:24px;vertical-align:-0.16em;filter:drop-shadow(0 4px 16px rgba(0,0,0,.45))}
 .pill svg{width:66px;height:44px;border-radius:5px;display:block}
 h1{font-family:'Playfair Display',serif;font-weight:800;font-size:112px;line-height:1;margin:30px 0 28px;text-shadow:0 4px 24px rgba(0,0,0,.45)}
 h1 i{color:var(--gold);font-style:normal}
@@ -50,7 +51,7 @@ const n=+new URLSearchParams(location.search).get('n')||1, s=slides[n-1], total=
 let h=`<div class="s on"><img class="bg" src="img/${s.img}">`;
 if(s.cover) h+=`<div class="shade"></div><div class="brand">Ferta <b>Estate</b></div><div class="num">${n}/${total}</div>
  <div class="cover"><span class="pill">Под гражданство Турции <svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#E30A17"/><circle cx="10.6" cy="10" r="5" fill="#fff"/><circle cx="11.85" cy="10" r="4" fill="#E30A17"/><polygon fill="#fff" points="14.5,10 18.97,8.55 16.2,12.35 16.2,7.65 18.97,11.45"/></svg></span>
- <h1>Квартира у <i>Галатской башни</i></h1>
+ <h1>Квартира у <i>Галатской башни</i><svg class="tower" viewBox="0 0 60 120" fill="var(--gold)"><circle cx="30" cy="3" r="2.2"/><rect x="29.2" y="3" width="1.6" height="7"/><polygon points="30,8 15,40 45,40"/><rect x="12" y="40" width="36" height="4" rx="1"/><rect x="14.5" y="44" width="31" height="14"/><g fill="#231B15"><path d="M17.5 57v-7a2.2 2.2 0 0 1 4.4 0v7z"/><path d="M24.6 57v-7a2.2 2.2 0 0 1 4.4 0v7z"/><path d="M31 57v-7a2.2 2.2 0 0 1 4.4 0v7z"/><path d="M38.1 57v-7a2.2 2.2 0 0 1 4.4 0v7z"/></g><rect x="10" y="58" width="40" height="4" rx="1"/><polygon points="15.5,62 44.5,62 47,111 13,111"/><g fill="#231B15"><rect x="22" y="70" width="3" height="7" rx="1.5"/><rect x="35" y="70" width="3" height="7" rx="1.5"/><rect x="28.5" y="82" width="3" height="8" rx="1.5"/><rect x="21" y="94" width="3" height="7" rx="1.5"/><rect x="36" y="94" width="3" height="7" rx="1.5"/></g><rect x="9" y="111" width="42" height="7" rx="1"/></svg></h1>
  <div class="price">$475 000</div>
  <div class="grid"><div><strong>1+1</strong>планировка</div><div><strong>60 м²</strong>площадь</div><div><strong>Таксим</strong>рядом Истикляль</div></div></div>`;
 else if(s.cta) h+=`<div class="cta"><div class="line"></div><h2>Квартира 1+1<br>у Галатской башни</h2>
