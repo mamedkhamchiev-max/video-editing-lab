@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{ --dark:#231B15; --cream:#F4EDE3; --gold:#C9A46A; --muted:#D9CBB6; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-variant-numeric:lining-nums;width:1080px;height:1350px;overflow:hidden;font-family:Montserrat,sans-serif;color:var(--cream);background:var(--dark)}
+.s{position:absolute;inset:0}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bg.top{height:880px}
+.shade.cov{background:linear-gradient(180deg,rgba(35,27,21,.5) 0%,rgba(35,27,21,0) 14%,rgba(35,27,21,0) 44%,rgba(35,27,21,.85) 60%,var(--dark) 66%,var(--dark) 100%)}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,27,21,.55) 0%,rgba(35,27,21,0) 16%,rgba(35,27,21,0) 34%,rgba(35,27,21,.88) 60%,var(--dark) 100%)}
+.shade.light{background:linear-gradient(180deg,rgba(35,27,21,.5) 0%,rgba(35,27,21,0) 16%,rgba(35,27,21,0) 64%,rgba(35,27,21,.92) 100%)}
+.shade.text{background:linear-gradient(180deg,rgba(35,27,21,.72) 0%,rgba(35,27,21,.86) 45%,rgba(35,27,21,.96) 100%)}
+.brand{position:absolute;top:56px;left:64px;font-size:24px;font-weight:600;letter-spacing:6px;text-transform:uppercase}
+.brand b{color:var(--gold)}
+.num{position:absolute;top:56px;right:64px;font-size:24px;font-weight:500;letter-spacing:3px;color:var(--muted)}
+.swipetop{position:absolute;top:44px;right:64px;display:flex;align-items:center;gap:12px;background:rgba(35,27,21,.6);border:1.5px solid var(--gold);font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:12px 22px;border-radius:40px}
+.swipetop svg{width:30px;height:30px}
+.cover{position:absolute;left:64px;right:64px;bottom:64px}
+.pill{display:inline-flex;align-items:center;gap:18px;background:var(--gold);color:var(--dark);font-weight:800;font-size:36px;letter-spacing:2px;text-transform:uppercase;padding:16px 22px 16px 32px;border-radius:50px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.pill svg{width:66px;height:44px;border-radius:5px;display:block}
+.ctz{display:inline-flex;align-items:center;gap:16px;margin-top:34px;background:var(--gold);color:var(--dark);font-weight:800;font-size:30px;letter-spacing:2px;text-transform:uppercase;padding:14px 20px 14px 28px;border-radius:50px;align-self:flex-start}
+.ctz svg{width:57px;height:38px;border-radius:4px;display:block}
+h1{font-family:'Playfair Display',serif;font-weight:800;font-size:96px;line-height:1.02;margin:28px 0 26px;text-shadow:0 4px 24px rgba(0,0,0,.45)}
+h1 i{color:var(--gold);font-style:italic;font-weight:600}
+.price{font-family:'Playfair Display',serif;font-size:104px;font-weight:800;color:var(--gold);line-height:1}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:34px;border-top:1px solid rgba(201,164,106,.5)}
+.grid div{padding:24px 0 0;font-size:23px;color:var(--muted);font-weight:500}
+.grid div strong{display:block;font-size:42px;color:var(--cream);font-weight:700;margin-bottom:4px}
+.cap{position:absolute;left:64px;right:64px;bottom:64px}
+.k{font-size:22px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.cap .t{font-family:'Playfair Display',serif;font-size:60px;font-weight:600;line-height:1.1;margin-top:12px}
+.cap .d{font-size:30px;line-height:1.45;color:var(--muted);margin-top:18px;max-width:900px}
+.txt{position:absolute;left:80px;right:80px;top:120px;bottom:60px;display:flex;flex-direction:column;justify-content:center}
+.txt h2{font-family:'Playfair Display',serif;font-size:74px;line-height:1.08;font-weight:600;margin:22px 0 40px}
+.txt h2 i{color:var(--gold);font-style:italic}
+.txt p{font-size:33px;line-height:1.5;color:var(--cream);margin-bottom:26px}
+.txt p.m{color:var(--muted)}
+.line{width:120px;height:4px;background:var(--gold)}
+.list{margin-top:10px}
+.list div{display:flex;align-items:baseline;gap:30px;padding:26px 0;border-bottom:1px solid rgba(201,164,106,.35)}
+.list b{font-family:'Playfair Display',serif;font-size:72px;font-weight:700;color:var(--gold);min-width:250px;line-height:1}
+.list b small{font-size:30px;font-family:Montserrat,sans-serif;font-weight:600;margin-left:8px}
+.list span{font-size:32px;line-height:1.35}
+.cta{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 90px;background:rgba(35,27,21,.84)}
+.cta h2{font-family:'Playfair Display',serif;font-size:80px;line-height:1.08;font-weight:600;margin:30px 0}
+.cta h2 i{color:var(--gold);font-style:italic}
+.cta p{font-size:33px;line-height:1.55;color:var(--muted)}
+.cta .btn{margin-top:56px;align-self:flex-start;border:2px solid var(--gold);color:var(--gold);font-weight:700;font-size:30px;letter-spacing:3px;padding:24px 40px;text-transform:uppercase}
+</style></head><body>
+<div id="root"></div>
+<script>
+const slides=[
+ {img:'01c.jpg',cover:true,pos:'50% 40%',cls:'top'},
+ {img:'09.jpg',k:'Гостиная',t:'Интерьер от Fendi Casa',d:'Отделка, дизайн и мебель — итальянский дом Fendi. Наборный паркет, мрамор и латунь в каждой детали.'},
+ {img:'06.jpg',k:'Кухня',t:'Кухня с фирменной фурнитурой Fendi',d:'Глянцевые фасады, столешница и фартук из чёрного камня с золотыми прожилками.'},
+ {img:'07.jpg',k:'Холл',t:'Мраморный пол с инкрустацией'},
+ {img:'08.jpg',k:'Спальня',t:'Выход прямо в свой сад'},
+ {img:'05.jpg',k:'Нулевой этаж',t:'Собственный сад и терраса',d:'Своя земля в центре Стамбула — и всего 2 минуты до набережной Мраморного моря.'},
+ {img:'02.jpg',k:'Гостевой санузел',t:'Мрамор, латунь и подсветка',pos:'50% 40%'},
+ {img:'04.jpg',text:'history'},
+ {img:'03.jpg',text:'life'},
+ {img:'09.jpg',text:'loc'},
+ {img:'01c.jpg',cta:true},
+];
+const n=+new URLSearchParams(location.search).get('n')||1, s=slides[n-1], total=slides.length;
+const arrow=c=>`<svg viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>`;
+const head=`<div class="brand">Ferta <b>Estate</b></div><div class="num">${n}/${total}</div>`;
+let h=`<div class="s"><img class="bg ${s.cls||''}" src="img/${s.img}" style="object-position:${s.pos||'50% 50%'}">`;
+if(s.cover) h+=`<div class="shade cov"></div><div class="brand">Ferta <b>Estate</b></div><div class="swipetop">Листайте ${arrow('#C9A46A')}</div>
+ <div class="cover"><span class="pill">Подходит под гражданство <svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#E30A17"/><circle cx="10.6" cy="10" r="5" fill="#fff"/><circle cx="11.85" cy="10" r="4" fill="#E30A17"/><polygon fill="#fff" points="14.5,10 18.97,8.55 16.2,12.35 16.2,7.65 18.97,11.45"/></svg></span>
+ <h1>Квартира с садом<br>by <i>Fendi Casa</i></h1>
+ <div class="price">$1 200 000</div>
+ <div class="grid"><div><strong>2+1</strong>планировка</div><div><strong>Свой сад</strong>нулевой этаж</div><div><strong>2 мин</strong>до Мраморного моря</div></div></div>`;
+else if(s.text==='history') h+=`<div class="shade text"></div>${head}<div class="txt"><div class="k">История места</div>
+ <h2>Жить там, где ковалась <i>история империи</i></h2>
+ <p>Комплекс построен на месте бывшей промышленной зоны Османской империи.</p>
+ <p class="m">Здесь выпускали патроны для винтовок Маузер, работали литейные мастерские и оружейные производства.</p>
+ <p class="m">Многие исторические здания бережно сохранены и сегодня стали частью квартала.</p></div>`;
+else if(s.text==='life') h+=`<div class="shade text"></div>${head}<div class="txt"><div class="k">Жизнь в комплексе</div>
+ <h2>Город внутри <i>города</i></h2>
+ <p>Рестораны, кафе и кофейни — и даже свой маленький турецкий «Гранд Базар» прямо на территории.</p>
+ <p class="m">Здесь живёт стамбульская элита, а квартиры выбирают одни из самых состоятельных людей мира.</p></div>`;
+else if(s.text==='loc') h+=`<div class="shade text"></div>${head}<div class="txt"><div class="k">Локация · Зейтинбурну</div>
+ <h2>Весь Стамбул — <i>рядом</i></h2>
+ <div class="list">
+ <div><b>2<small>мин</small></b><span>набережная Мраморного моря</span></div>
+ <div><b>15<small>мин</small></b><span>Галатская башня, площадь Таксим, Босфор</span></div>
+ <div><b>20<small>мин</small></b><span>азиатская сторона Стамбула</span></div></div></div>`;
+else if(s.cta) h+=`<div class="cta"><div class="line"></div><h2>Квартира 2+1<br>by <i>Fendi Casa</i></h2>
+ <p>Зейтинбурну · свой сад<br>2 минуты до Мраморного моря<br>$1 200 000</p><div class="ctz">Подходит под гражданство Турции <svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#E30A17"/><circle cx="10.6" cy="10" r="5" fill="#fff"/><circle cx="11.85" cy="10" r="4" fill="#E30A17"/><polygon fill="#fff" points="14.5,10 18.97,8.55 16.2,12.35 16.2,7.65 18.97,11.45"/></svg></div>
+ <div class="btn">Пишите в Direct</div></div>`;
+else h+=`<div class="shade light"></div>${head}<div class="cap"><div class="k">${s.k}</div><div class="t">${s.t}</div>${s.d?`<div class="d">${s.d}</div>`:''}</div>`;
+document.getElementById('root').innerHTML=h+'</div>';
+</script></body></html>
