@@ -1,0 +1,389 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}
+:root{
+  --navy:#0E1B2A;--navy2:#13283B;--accent:#35C5DD;--gold:#E7B15A;
+  --bg:#F7F9FB;--text:#1A2530;--text2:#6B7A88;--border:#E3E8ED;
+  --good:#2E9E6B;--goodbg:#E7F5EE;--warn:#E0A33A;--warnbg:#FCF3E1;--high:#E2674A;--highbg:#FBE9E4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;color:var(--text);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#fff;display:flex;flex-direction:column}
+h1,h2,h3,.mts{font-family:Montserrat,sans-serif}
+em{font-style:normal;color:var(--accent)}
+.icn{width:1em;height:1em;display:inline-block;vertical-align:-.12em;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- top / foot bars ---------- */
+.top{height:13mm;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 12mm;color:#fff;flex:none}
+.top .logo{font-family:Montserrat;font-weight:800;letter-spacing:.6mm;font-size:10pt;display:flex;align-items:center;gap:2.5mm}
+.top .logo .dot{width:6mm;height:6mm;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1C8FA3);display:inline-block}
+.top .logo b{color:var(--accent)}
+.top .r{font-family:Montserrat;font-weight:600;font-size:8.5pt;color:#9FB6C4;letter-spacing:.3mm}
+.foot{height:11mm;background:var(--navy);color:#9FB6C4;display:flex;align-items:center;justify-content:space-between;padding:0 12mm;font-size:8pt;flex:none;margin-top:auto}
+.foot b{color:#fff}.foot .accent{color:var(--accent)}
+
+/* ---------- cover ---------- */
+.cover{background:var(--navy);color:#fff;padding:0}
+.cv{padding:16mm 14mm 0;flex:1;display:flex;flex-direction:column}
+.cv .logo{font-family:Montserrat;font-weight:900;letter-spacing:1mm;font-size:15pt;display:flex;align-items:center;gap:3.5mm}
+.cv .logo .dot{width:11mm;height:11mm;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1C8FA3)}
+.cv .logo b{color:var(--accent)}
+.kicker{margin-top:14mm;font-family:Montserrat;font-weight:700;font-size:9.5pt;letter-spacing:2.2mm;color:var(--gold)}
+.cv h1{font-family:Montserrat;font-weight:800;font-size:40pt;line-height:1.05;margin-top:5mm}
+.cv .lead{font-size:12pt;color:#AFC3D1;margin-top:6mm;line-height:1.55;max-width:165mm}
+.browser{margin-top:10mm;background:#223446;border-radius:3mm;padding:3mm 3mm 0;box-shadow:0 10mm 24mm rgba(0,0,0,.35)}
+.bbar{display:flex;align-items:center;gap:2mm;padding:0 1mm 3mm}
+.bbar i{width:3mm;height:3mm;border-radius:50%;background:#54697C;display:inline-block}
+.bbar .url{margin-left:3mm;flex:1;background:#16293A;border-radius:10mm;height:6mm;display:flex;align-items:center;padding:0 4mm;font-size:8pt;color:#9FB6C4}
+.browser img{width:100%;display:block;border-radius:1.5mm 1.5mm 0 0;height:92mm;object-fit:cover;object-position:top}
+.stats{display:flex;gap:4mm;margin-top:auto;padding:9mm 0}
+.stats .s{flex:1;background:rgba(255,255,255,.055);border:.3mm solid rgba(255,255,255,.1);border-radius:2.5mm;padding:5mm 5mm}
+.stats .s b{display:block;font-family:Montserrat;font-weight:800;font-size:24pt;color:var(--gold);line-height:1}
+.stats .s span{font-size:9pt;color:#AFC3D1;display:block;margin-top:2.5mm;line-height:1.35}
+.cover .datebar{background:#09141F;color:#7E95A6;font-size:8.5pt;padding:4mm 14mm;display:flex;justify-content:space-between;flex:none}
+.cover .datebar b{color:#fff}
+
+/* ---------- generic content ---------- */
+.body{padding:9mm 12mm 0;flex:1;display:flex;flex-direction:column}
+.sect{font-family:Montserrat;font-weight:700;font-size:9pt;letter-spacing:1.4mm;color:var(--accent);text-transform:uppercase}
+.h{font-family:Montserrat;font-weight:800;font-size:23pt;color:var(--navy);line-height:1.12;margin-top:2.5mm}
+.sub{font-size:10.5pt;color:var(--text2);line-height:1.55;margin-top:3.5mm;max-width:172mm}
+.big-q{font-size:11pt;line-height:1.6}
+
+/* plain-language definition box */
+.define{margin-top:7mm;background:var(--bg);border-radius:3mm;padding:6mm 7mm;display:flex;gap:5mm;align-items:flex-start}
+.define .ic{flex:none;width:13mm;height:13mm;border-radius:2.5mm;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15pt}
+.define h3{font-size:12pt;color:var(--navy);font-weight:800}
+.define p{font-size:10pt;line-height:1.55;margin-top:1.5mm;color:var(--text)}
+
+/* verdict: traffic light 3 columns */
+.verdict{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5mm;margin-top:9mm}
+.vc{border-radius:3mm;padding:6mm 6mm;border:.3mm solid var(--border);display:flex;flex-direction:column}
+.vc.g{background:var(--goodbg);border-color:#BfE6D3}
+.vc.w{background:var(--warnbg);border-color:#F0DDB4}
+.vc.b{background:#EAF1FB;border-color:#C9DBF4}
+.vc .tag{display:inline-flex;align-items:center;gap:2mm;font-family:Montserrat;font-weight:800;font-size:9pt;letter-spacing:.3mm;text-transform:uppercase}
+.vc.g .tag{color:var(--good)}.vc.w .tag{color:#B9801B}.vc.b .tag{color:#2E63B0}
+.vc .em{font-size:22pt;margin-bottom:1mm}
+.vc h3{font-size:13pt;color:var(--navy);font-weight:800;margin-top:3mm;line-height:1.2}
+.vc ul{list-style:none;margin-top:3.5mm}
+.vc li{font-size:9.3pt;line-height:1.4;padding:1.6mm 0 1.6mm 5.5mm;position:relative;border-top:.2mm solid rgba(0,0,0,.06)}
+.vc li:first-child{border-top:none}
+.vc li:before{content:"";position:absolute;left:0;top:2.6mm;width:2.4mm;height:2.4mm;border-radius:50%}
+.vc.g li:before{background:var(--good)}.vc.w li:before{background:var(--warn)}.vc.b li:before{background:#2E63B0}
+.callout{margin-top:9mm;background:var(--navy);color:#fff;border-radius:3mm;padding:6mm 7mm;display:flex;gap:5mm;align-items:center}
+.callout .ic{flex:none;font-size:20pt;color:var(--gold)}
+.callout b{font-family:Montserrat;color:var(--gold)}
+.callout p{font-size:10.5pt;line-height:1.55}
+
+/* numbers row */
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:8mm}
+.nums .n{border:.3mm solid var(--border);border-radius:3mm;padding:6mm;text-align:center;background:#fff}
+.nums .n .v{font-family:Montserrat;font-weight:900;font-size:30pt;color:var(--navy);line-height:1}
+.nums .n .v small{font-size:13pt;color:var(--text2)}
+.nums .n .l{font-size:9pt;color:var(--text2);margin-top:3mm;line-height:1.35}
+.nums .n.hl{background:var(--navy);border-color:var(--navy)}
+.nums .n.hl .v{color:var(--gold)}.nums .n.hl .l{color:#AFC3D1}
+
+.analogy{margin-top:8mm;background:var(--warnbg);border-left:1.6mm solid var(--gold);border-radius:0 2.5mm 2.5mm 0;padding:5mm 6mm}
+.analogy b{font-family:Montserrat;color:#B9801B;font-weight:800;font-size:10pt}
+.analogy p{font-size:10pt;line-height:1.6;margin-top:1.5mm}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:8mm}
+.panel{border:.3mm solid var(--border);border-radius:3mm;padding:5.5mm 6mm}
+.panel h3{font-size:10.5pt;color:var(--navy);font-weight:800;display:flex;align-items:center;gap:2.5mm}
+.panel .okpill{font-size:8pt;font-weight:700;color:var(--good);background:var(--goodbg);padding:.8mm 2.5mm;border-radius:10mm;margin-left:auto}
+.panel p{font-size:9.5pt;line-height:1.55;color:var(--text);margin-top:3mm}
+.bar{display:flex;align-items:center;gap:3mm;margin-top:3mm;font-size:9pt}
+.bar .lab{width:34mm;color:var(--text2)}
+.bar .track{flex:1;height:5mm;background:var(--bg);border-radius:10mm;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:10mm}
+.bar .val{width:16mm;text-align:right;font-weight:700;color:var(--navy)}
+
+/* issue cards */
+.issue{display:flex;gap:0;border:.3mm solid var(--border);border-radius:3mm;overflow:hidden;margin-top:4.5mm}
+.issue .stripe{flex:none;width:12mm;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;gap:2mm;padding:3mm 0}
+.issue .stripe .em{font-size:15pt}
+.issue.high .stripe{background:var(--high)}
+.issue.warn .stripe{background:var(--warn)}
+.issue.low .stripe{background:var(--good)}
+.issue .in{flex:1;padding:4mm 5mm;display:flex;flex-direction:column;justify-content:center}
+.issue .pr{font-family:Montserrat;font-size:7.5pt;font-weight:800;letter-spacing:.3mm;text-transform:uppercase;padding:.6mm 0}
+.issue.high .pr{color:var(--high)}.issue.warn .pr{color:#B9801B}.issue.low .pr{color:var(--good)}
+.issue h3{font-size:11pt;color:var(--navy);font-weight:800;margin-top:.5mm}
+.issue .plain{font-size:9.2pt;line-height:1.45;color:var(--text);margin-top:2mm}
+.issue .plain b{color:var(--navy)}
+.issue .fix{font-size:9pt;line-height:1.4;color:var(--text2);margin-top:2mm}
+.issue .fix b{color:var(--good);font-weight:700}
+
+/* speed gauge */
+.speed{display:grid;grid-template-columns:72mm 1fr;gap:8mm;margin-top:8mm;align-items:center}
+.gauge{position:relative;width:72mm;height:40mm}
+.gauge .label{position:absolute;bottom:0;left:0;right:0;text-align:center}
+.gauge .label b{font-family:Montserrat;font-weight:900;font-size:26pt;color:var(--good)}
+.gauge .label span{display:block;font-size:9pt;color:var(--text2);letter-spacing:.5mm}
+.sbars .bar .fill.g{background:var(--good)}
+.legend{font-size:8.5pt;color:var(--text2);margin-top:4mm;line-height:1.5}
+
+/* roadmap */
+.road{margin-top:9mm;display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:5mm;align-items:flex-start;position:relative;padding-bottom:6mm}
+.step:before{content:"";position:absolute;left:5.5mm;top:11mm;bottom:0;width:.6mm;background:var(--border)}
+.step:last-child{padding-bottom:0}.step:last-child:before{display:none}
+.step .dot{flex:none;width:11mm;height:11mm;border-radius:50%;background:var(--navy);color:#fff;font-family:Montserrat;font-weight:800;font-size:11pt;display:flex;align-items:center;justify-content:center;z-index:1}
+.step .when{font-family:Montserrat;font-weight:800;font-size:8pt;letter-spacing:.4mm;text-transform:uppercase;color:var(--accent)}
+.step h3{font-size:11.5pt;color:var(--navy);font-weight:800;margin-top:.5mm}
+.step p{font-size:9.3pt;line-height:1.5;color:var(--text);margin-top:1.5mm;max-width:155mm}
+.step.now .dot{background:var(--high)}
+.step.soon .dot{background:var(--warn)}
+.step.later .dot{background:var(--good)}
+</style></head><body>
+
+<!-- ===================== PAGE 1 — COVER ===================== -->
+<div class="page cover">
+  <div class="cv">
+    <div class="logo"><span class="dot"></span>FERTA<b>ESTATE</b></div>
+    <div class="kicker">SEO-ОТЧЁТ · ПРОСТЫМ ЯЗЫКОМ</div>
+    <h1>Как ваш сайт<br>выглядит в <em>Google</em></h1>
+    <p class="lead">Разобрали сайт fertaestate.com: что уже сделано хорошо, что стоит поправить и чего пока ждать от поиска. Без сложных терминов — так, чтобы было понятно.</p>
+    <div class="browser">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">🔒 fertaestate.com</div></div>
+      <img src="shot-home.png" alt="Главная страница сайта">
+    </div>
+    <div class="stats">
+      <div class="s"><b>166</b><span>страниц сайта проверено</span></div>
+      <div class="s"><b>~3 нед.</b><span>сайту «от роду» в Google</span></div>
+      <div class="s"><b>0</b><span>технических ошибок в карте сайта</span></div>
+    </div>
+  </div>
+  <div class="datebar"><span>Подготовил ассистент · <b>2 ноября 2026</b></span><span>fertaestate.com — недвижимость в Стамбуле</span></div>
+</div>
+
+<!-- ===================== PAGE 2 — ЧТО ЭТО + ВЕРДИКТ ===================== -->
+<div class="page">
+  <div class="top"><div class="logo"><span class="dot"></span>FERTA<b>ESTATE</b></div><div class="r">SEO-ОТЧЁТ · ПРОСТЫМ ЯЗЫКОМ</div></div>
+  <div class="body">
+    <div class="sect">С чего начать</div>
+    <div class="h">Что такое SEO и как дела у сайта</div>
+
+    <div class="define">
+      <div class="ic"><svg class="icn" viewBox="0 0 24 24" style="width:7mm;height:7mm"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+      <div>
+        <h3>SEO — это «чтобы вас находили в Google бесплатно»</h3>
+        <p>Когда человек вводит в Google «купить квартиру в Стамбуле», поисковик показывает ему список сайтов. SEO — это работа над тем, чтобы <b>ваш сайт оказался в этом списке повыше</b>. Чем выше — тем больше людей заходит, и за эти заходы не нужно платить, как за рекламу.</p>
+      </div>
+    </div>
+
+    <div class="sub" style="margin-top:9mm">Коротко: <b>технически сайт сделан хорошо</b>, но он совсем молодой — Google заметил его всего ~3 недели назад и пока только «присматривается». Поэтому гостей из поиска почти нет, и это нормальный этап для любого нового сайта.</div>
+
+    <div class="verdict">
+      <div class="vc g">
+        <div class="em">✅</div>
+        <div class="tag">Уже хорошо</div>
+        <h3>Фундамент крепкий</h3>
+        <ul>
+          <li>Все 166 страниц открываются, без битых ссылок</li>
+          <li>У каждой страницы есть заголовок и описание для Google</li>
+          <li>Карта сайта отправлена, ошибок — ноль</li>
+          <li>У всех фото прописаны подписи, есть разметка для цен и объектов</li>
+        </ul>
+      </div>
+      <div class="vc w">
+        <div class="em">🛠️</div>
+        <div class="tag">Стоит поправить</div>
+        <h3>Мелкая докрутка</h3>
+        <ul>
+          <li>Картинка-превью при отправке ссылки — сейчас иконка вместо фото</li>
+          <li>Некоторые заголовки длинноваты — Google их обрежет</li>
+          <li>Много почти пустых страниц объявлений</li>
+          <li>Нет отдельных страниц под районы и планировки</li>
+        </ul>
+      </div>
+      <div class="vc b">
+        <div class="em">⏳</div>
+        <div class="tag">Нужно время</div>
+        <h3>Сайт «взрослеет»</h3>
+        <ul>
+          <li>Google 3 недели как узнал сайт</li>
+          <li>Гостей из поиска пока почти нет — это норма</li>
+          <li>Позиции появятся, когда накопится статистика</li>
+          <li>Вернуться к цифрам имеет смысл через месяц</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="ic">💡</div>
+      <p><b>Главная мысль.</b> Ничего не сломано. Сайт — как новый магазин: вывеску повесили недавно, Google ещё составляет о нём мнение. Наша задача сейчас — помочь ему «познакомиться» с сайтом и правильно всё оформить с самого начала.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Ferta Estate · <b>SEO-отчёт</b></span><span class="accent">Страница 2</span></div>
+</div>
+
+<!-- ===================== PAGE 3 — GOOGLE СЕЙЧАС ===================== -->
+<div class="page">
+  <div class="top"><div class="logo"><span class="dot"></span>FERTA<b>ESTATE</b></div><div class="r">SEO-ОТЧЁТ · ПРОСТЫМ ЯЗЫКОМ</div></div>
+  <div class="body">
+    <div class="sect">Данные из Google Search Console</div>
+    <div class="h">Что происходит в поиске прямо сейчас</div>
+    <div class="sub">Мы подключили официальный инструмент Google (Search Console) — он показывает, сколько людей видят сайт в поиске и заходят на него. Вот честная картина за всё время, что есть данные (с 12 октября).</div>
+
+    <div class="nums">
+      <div class="n hl"><div class="v">~9</div><div class="l">заходов из Google за 3 недели</div></div>
+      <div class="n"><div class="v">~50</div><div class="l">раз сайт <b>показался</b> в поиске</div></div>
+      <div class="n"><div class="v">~10<small>/166</small></div><div class="l">страниц пока попадали в выдачу</div></div>
+    </div>
+
+    <div class="analogy">
+      <b>Простыми словами</b>
+      <p>Представьте новый магазин, который открылся 3 недели назад в большом городе. Мимо прошло ~50 человек, 9 из них заглянули внутрь. Это не провал — это самое начало. Чтобы поток вырос, городу (Google) нужно время привыкнуть, что магазин есть, а нам — повесить понятные указатели.</p>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <h3><svg class="icn" viewBox="0 0 24 24" style="width:5mm;height:5mm;color:var(--accent)"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg> По каким словам находят</h3>
+        <p>Пока сайт находят почти только по <b>названию компании</b> — «ferta». Это значит: кто уже слышал о вас, тот доходит. А вот по общим запросам вроде «квартира в Стамбуле» сайт ещё не показывается — над этим и будем работать.</p>
+        <div class="bar"><div class="lab">«ferta» (название)</div><div class="track"><div class="fill" style="width:85%"></div></div><div class="val">поз. 7</div></div>
+        <div class="bar"><div class="lab">общие запросы</div><div class="track"><div class="fill" style="width:6%;background:var(--border)"></div></div><div class="val" style="color:var(--text2)">пока нет</div></div>
+      </div>
+      <div class="panel">
+        <h3><svg class="icn" viewBox="0 0 24 24" style="width:5mm;height:5mm;color:var(--good)"><path d="M4 12l5 5L20 6"/></svg> Карта сайта <span class="okpill">в порядке</span></h3>
+        <p>«Карта сайта» — это список всех страниц, который сайт отдаёт Google, чтобы тот ничего не пропустил. У вас она <b>отправлена и без единой ошибки</b>, Google скачивал её 1 ноября. Единственное — в ней 149 страниц, а на сайте уже 166: стоит обновить, чтобы попали все.</p>
+        <div class="bar"><div class="lab">Отправлено в Google</div><div class="track"><div class="fill g" style="width:90%;background:var(--good)"></div></div><div class="val">149</div></div>
+        <div class="bar"><div class="lab">Всего на сайте</div><div class="track"><div class="fill" style="width:100%;background:var(--navy)"></div></div><div class="val">166</div></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:9mm">
+      <div class="ic">📈</div>
+      <p><b>Что это значит.</b> «Быстрых побед» в цифрах сейчас искать рано — статистики слишком мало. Поэтому мы наводим порядок в оформлении (следующая страница) и возвращаемся к цифрам через 3–4 недели, когда Google накопит данные.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Ferta Estate · <b>SEO-отчёт</b></span><span class="accent">Страница 3</span></div>
+</div>
+
+<!-- ===================== PAGE 4 — ЧТО ПОПРАВИТЬ ===================== -->
+<div class="page">
+  <div class="top"><div class="logo"><span class="dot"></span>FERTA<b>ESTATE</b></div><div class="r">SEO-ОТЧЁТ · ПРОСТЫМ ЯЗЫКОМ</div></div>
+  <div class="body">
+    <div class="sect">План улучшений</div>
+    <div class="h">Что стоит поправить — по-человечески</div>
+    <div class="sub">Пять понятных пунктов. Цвет слева — насколько это важно: <b style="color:var(--high)">красный</b> — сделать в первую очередь, <b style="color:#B9801B">жёлтый</b> — на очереди, <b style="color:var(--good)">зелёный</b> — задел на рост.</div>
+
+    <div class="issue high">
+      <div class="stripe"><span class="em">🖼️</span></div>
+      <div class="in">
+        <div class="pr">Сделать в первую очередь</div>
+        <h3>Красивое превью при отправке ссылки</h3>
+        <div class="plain">Когда вы кидаете ссылку на сайт в WhatsApp, Telegram или соцсети, рядом должно всплывать <b>фото объекта</b>. Сейчас на главной и разделах вместо фото показывается маленькая иконка-логотип — выглядит бедно и снижает доверие.</div>
+        <div class="fix"><b>Что сделать:</b> поставить одно красивое фото-обложку для этих страниц (на карточках объектов фото уже подтягивается правильно).</div>
+      </div>
+    </div>
+
+    <div class="issue warn">
+      <div class="stripe"><span class="em">✂️</span></div>
+      <div class="in">
+        <div class="pr">На очереди</div>
+        <h3>Заголовки длинноваты — Google их обрезает</h3>
+        <div class="plain">У каждой страницы есть заголовок, который видно в поиске. На <b>46 страницах</b> (включая все карточки объектов) он длиннее, чем помещается, и Google обрубает хвост многоточием.</div>
+        <div class="fix"><b>Что сделать:</b> немного укоротить шаблон заголовка, чтобы он помещался целиком и читался привлекательно.</div>
+      </div>
+    </div>
+
+    <div class="issue warn">
+      <div class="stripe"><span class="em">📄</span></div>
+      <div class="in">
+        <div class="pr">На очереди</div>
+        <h3>Почти пустые страницы объявлений</h3>
+        <div class="plain">Из 119 страниц отдельных квартир <b>71 почти без текста</b> и похожи одна на другую. Google такие страницы недолюбливает и может не показывать их вовсе.</div>
+        <div class="fix"><b>Что сделать:</b> либо наполнить их содержанием, либо «склеить» с карточкой объекта — решим, под какие запросы они нужны.</div>
+      </div>
+    </div>
+
+    <div class="issue low">
+      <div class="stripe"><span class="em">🗺️</span></div>
+      <div class="in">
+        <div class="pr">Задел на рост</div>
+        <h3>Нет страниц под районы и планировки</h3>
+        <div class="plain">Люди ищут конкретно: «квартира в Бейликдюзю», «квартира 2+1 в Стамбуле», «с видом на море». Сейчас под такие запросы <b>нет отдельных страниц</b> — а значит, нечему и показываться в поиске.</div>
+        <div class="fix"><b>Что сделать:</b> завести страницы-витрины по районам и типам квартир. Это самый большой запас будущего трафика.</div>
+      </div>
+    </div>
+
+    <div class="issue low">
+      <div class="stripe"><span class="em">🔗</span></div>
+      <div class="in">
+        <div class="pr">Задел на рост</div>
+        <h3>Нужны первые упоминания в интернете</h3>
+        <div class="plain">Молодому сайту Google доверяет больше, когда на него <b>ссылаются другие</b>: каталоги недвижимости, соцсети, профиль в Instagram. Пока таких «рекомендаций» почти нет.</div>
+        <div class="fix"><b>Что сделать:</b> разместить сайт в профиле Instagram и паре профильных каталогов — для стартового доверия.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Ferta Estate · <b>SEO-отчёт</b></span><span class="accent">Страница 4</span></div>
+</div>
+
+<!-- ===================== PAGE 5 — СКОРОСТЬ + ПЛАН ===================== -->
+<div class="page">
+  <div class="top"><div class="logo"><span class="dot"></span>FERTA<b>ESTATE</b></div><div class="r">SEO-ОТЧЁТ · ПРОСТЫМ ЯЗЫКОМ</div></div>
+  <div class="body">
+    <div class="sect">Скорость</div>
+    <div class="h">Сайт быстрый — это плюс</div>
+    <div class="sub">Google любит быстрые сайты и показывает их выше. Мы замерили загрузку на телефоне — результат хороший, в «зелёной» зоне.</div>
+
+    <div class="speed">
+      <div class="gauge">
+        <svg viewBox="0 0 200 110" style="width:100%;height:100%">
+          <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="#E3E8ED" stroke-width="16" stroke-linecap="round"/>
+          <path d="M18 100 A82 82 0 0 1 150 38" fill="none" stroke="#2E9E6B" stroke-width="16" stroke-linecap="round"/>
+          <circle cx="150" cy="38" r="6" fill="#2E9E6B"/>
+        </svg>
+        <div class="label"><b>~2 сек</b><span>ЗАГРУЗКА НА ТЕЛЕФОНЕ</span></div>
+      </div>
+      <div class="sbars">
+        <div class="bar"><div class="lab">Главная</div><div class="track"><div class="fill g" style="width:62%"></div></div><div class="val">2.4 с</div></div>
+        <div class="bar"><div class="lab">Карточка объекта</div><div class="track"><div class="fill g" style="width:36%"></div></div><div class="val">1.4 с</div></div>
+        <div class="bar"><div class="lab">Страница квартиры</div><div class="track"><div class="fill g" style="width:20%"></div></div><div class="val">0.7 с</div></div>
+        <div class="legend">Единственное, за чем стоит следить — «вес» фотографий на карточках объектов (там тяжёлые картинки). Их можно сжать без потери качества, тогда будет ещё быстрее.</div>
+      </div>
+    </div>
+
+    <div class="sect" style="margin-top:11mm">Что делаем дальше</div>
+    <div class="h" style="font-size:19pt">Простой план по шагам</div>
+    <div class="road">
+      <div class="step now">
+        <div class="dot">1</div>
+        <div>
+          <div class="when">Сейчас</div>
+          <h3>Навести порядок в оформлении</h3>
+          <p>Поставить фото-превью для ссылок, укоротить заголовки, обновить карту сайта (149 → 166). Это небольшие правки в коде сайта — нужен доступ к нему.</p>
+        </div>
+      </div>
+      <div class="step soon">
+        <div class="dot">2</div>
+        <div>
+          <div class="when">Ближайшие недели</div>
+          <h3>Добавить страницы-витрины</h3>
+          <p>Сделать отдельные страницы под районы и планировки — чтобы сайту было с чем показываться по конкретным запросам покупателей.</p>
+        </div>
+      </div>
+      <div class="step later">
+        <div class="dot">3</div>
+        <div>
+          <div class="when">Через 3–4 недели</div>
+          <h3>Вернуться к цифрам Google</h3>
+          <p>Когда накопится статистика, найдём реальные запросы и страницы, которые стоят на 2-й странице поиска, и подтолкнём их в топ. Вот тогда начнётся заметный рост.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:10mm">
+      <div class="ic">🤝</div>
+      <p><b>Что нужно от вас.</b> Дать доступ к коду сайта — и я внесу правки из пунктов 1–2. А данные Google я уже вижу и прослежу за ними сам.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Ferta Estate · <b>SEO-отчёт · 2 ноября 2026</b></span><span class="accent">Страница 5</span></div>
+</div>
+
+</body></html>
